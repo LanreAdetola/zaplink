@@ -1,0 +1,52 @@
+﻿@using ZapLink.Models
+
+
+<h3>AddLinkForm</h3>
+
+<EditForm Model="newLink" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <div class="mb-3">
+        <label>Title</label>
+        <InputText class="form-control" @bind-Value="newLink.Title" />
+    </div>
+
+    <div class="mb-3">
+        <label>URL</label>
+        <InputText class="form-control" @bind-Value="newLink.Url" />
+    </div>
+
+    <div class="mb-3">
+        <label>Tags (comma separated)</label>
+        <InputText class="form-control" @bind-Value="tagsRaw" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Link</button>
+
+</EditForm>
+
+
+
+@code {
+    private LinkItem newLink = new();
+    private string tagsRaw = "";
+
+    [Parameter]
+    public EventCallback<LinkItem> OnAdd { get; set; }
+
+    private async Task HandleSubmit()
+    {
+        newLink.Tags = tagsRaw 
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .ToList();
+
+        await OnAdd.InvokeAsync(newLink);
+
+        // reset the form
+        newLink = new();
+        tagsRaw = "";
+    }
+
+}

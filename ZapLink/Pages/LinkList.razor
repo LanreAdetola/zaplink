@@ -1,0 +1,98 @@
+﻿@page "/"
+@using ZapLink.Models
+@using ZapLink.Shared
+
+<h1>My Links</h1>
+
+<AddLinkForm OnAdd="AddLink" />
+
+@if (editingLink is not null)
+{
+    <EditForm Model="editingLink" OnValidSubmit="UpdateLink">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-2">
+            <label>Title</label>
+            <InputText class="form-control" @bind-Value="editingLink.Title" />
+        </div>
+
+        <div class="mb-2">
+            <label>URL</label>
+            <InputText class="form-control" @bind-Value="editingLink.Url" />
+        </div>
+
+        <div class="mb-2">
+            <label>Tags (comma separated)</label>
+            <InputText class="form-control" @bind-Value="tagsRaw" />
+        </div>
+
+        <button class="btn btn-success" type="submit">Save</button>
+        <button class="btn btn-secondary ms-2" type="button" @onclick="CancelEdit">Cancel</button>
+    </EditForm>
+}
+
+@if (links.Count == 0)
+{
+    <p>No links yet</p>
+}
+else
+{
+    @foreach (var link in links)
+    {
+        <LinkCard Link="link" OnDelete="DeleteLink" OnEdit="StartEdit" />
+    }
+}
+
+@code {
+    private List<LinkItem> links = new();
+    private LinkItem? editingLink;
+    private string tagsRaw = "";
+
+    private void AddLink(LinkItem newLink)
+    {
+        newLink.Id = links.Count + 1;
+        links.Add(newLink);
+    }
+
+    private void DeleteLink(LinkItem toDelete)
+    {
+        links.Remove(toDelete);
+    }
+
+    private void StartEdit(LinkItem link)
+    {
+        editingLink = new LinkItem
+        {
+            Id = link.Id,
+            Title = link.Title,
+            Url = link.Url,
+            Tags = new List<string>(link.Tags)
+        };
+        tagsRaw = string.Join(", ", editingLink.Tags);
+    }
+
+    private void CancelEdit()
+    {
+        editingLink = null;
+        tagsRaw = "";
+    }
+
+    private void UpdateLink()
+    {
+        if (editingLink is null) return;
+
+        editingLink.Tags = tagsRaw
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .ToList();
+
+        var index = links.FindIndex(l => l.Id == editingLink.Id);
+        if (index >= 0)
+        {
+            links[index] = editingLink;
+        }
+
+        editingLink = null;
+        tagsRaw = "";
+    }
+}
