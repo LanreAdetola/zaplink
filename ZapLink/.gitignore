@@ -1,0 +1,15 @@
+bin/
+obj/
+**/bin/
+**/obj/
+.vscode/
+*.user
+*.suo
+ZapLink.Api/local.settings.json
+.DS_Store
+*.log
+*.tmp
+*.swp
+*.bak
+*.code-workspace
+
