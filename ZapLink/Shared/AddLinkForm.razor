@@ -1,7 +1,9 @@
 ﻿@using ZapLink.Models
 
 
-<h3>AddLinkForm</h3>
+
+
+<h3>Add Link Form</h3>
 
 <EditForm Model="newLink" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
@@ -10,7 +12,7 @@
 
     <div class="mb-3">
         <label>Title</label>
-        <InputText class="form-control" @bind-Value="newLink.Title" />
+        <InputText class="form-control" @bind-Value="newLink.Title" autofocus />
     </div>
 
     <div class="mb-3">
@@ -23,7 +25,7 @@
         <InputText class="form-control" @bind-Value="tagsRaw" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Add Link</button>
+    <button type="submit" class="btn btn-primary mb-3">Add Link</button>
 
 </EditForm>
 

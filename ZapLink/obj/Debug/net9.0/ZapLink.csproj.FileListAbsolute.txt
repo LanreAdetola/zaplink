@@ -1073,10 +1073,10 @@
 /Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/refint/ZapLink.dll
 /Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/ZapLink.pdb
 /Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/ref/ZapLink.dll
-/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.jdlzjzi1tb.wasm
-/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.zrpnfgtd3z.pdb
-/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.jdlzjzi1tb.wasm.gz
-/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.zrpnfgtd3z.pdb.gz
-/Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/compressed/in4qkj6l04-jdlzjzi1tb.gz
-/Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/compressed/5f25l87lea-zrpnfgtd3z.gz
-/Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/compressed/bvf8821f7n-b66ud78jdl.gz
+/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.s66cqdk7a8.wasm
+/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.e0y605tm18.pdb
+/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.s66cqdk7a8.wasm.gz
+/Users/november/Documents/C# Project/Zaplink/ZapLink/bin/Debug/net9.0/wwwroot/_framework/ZapLink.e0y605tm18.pdb.gz
+/Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/compressed/in4qkj6l04-s66cqdk7a8.gz
+/Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/compressed/5f25l87lea-e0y605tm18.gz
+/Users/november/Documents/C# Project/Zaplink/ZapLink/obj/Debug/net9.0/compressed/bvf8821f7n-dim5y0h8gk.gz

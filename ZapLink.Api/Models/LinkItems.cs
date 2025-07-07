@@ -1,24 +1,26 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace ZapLink.Models;
+namespace ZapLink.Api.Models;
 
 public class LinkItem
 {
+    [JsonProperty("id")]
     public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    [JsonProperty("userId")]
     public string UserId { get; set; } = "";
 
     [Required]
+    [JsonProperty("title")]
     public string Title { get; set; } = "";
 
     [Required]
-    [Url]
+    [JsonProperty("url")]
     public string Url { get; set; } = "";
 
+    [JsonProperty("tags")]
     public List<string> Tags { get; set; } = new();
-
-    
-    [JsonPropertyName("created_at")]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
 }

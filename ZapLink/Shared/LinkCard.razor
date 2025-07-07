@@ -1,21 +1,29 @@
 ﻿@using ZapLink.Models
 @inherits LayoutComponentBase
 
+
+
+
 @if (Link is not null)
 {
-<div class="link-card">
+<div class="link-card mb-3 p-3 border rounded shadow-sm">
     <h3>@Link.Title</h3>
     <a href="@Link.Url" target="_blank">@Link.Url</a>
     <div class="tags">
         @foreach (var tag in Link.Tags)
         {
-            <span class="tag">@tag</span>
+            <span class="badge bg-primary me-1">@tag</span>
         }
     </div>
+
+    <small class="text-muted d-block mt-2">
+        Added on @Link.CreatedAt.ToLocalTime().ToString("MMM dd, yyyy")
+    </small>
 
     <div class="actions mt-2">
         <button class="btn btn-sm btn-warning me-2" @onclick="() => OnEdit.InvokeAsync(Link)">Edit</button>
         <button class="btn btn-sm btn-danger" @onclick="() => OnDelete.InvokeAsync(Link)">Delete</button>
+        
     </div>
 
 </div>

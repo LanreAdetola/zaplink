@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject ZapLink.Services.LinkService LinkService
 @using ZapLink.Models
 @using ZapLink.Shared
 
@@ -6,7 +7,11 @@
 
 <AddLinkForm OnAdd="AddLink" />
 
-@if (editingLink is not null)
+@if (isLoading)
+{
+    <p>Loading links...</p>
+}
+else if (editingLink is not null)
 {
     <EditForm Model="editingLink" OnValidSubmit="UpdateLink">
         <DataAnnotationsValidator />
@@ -31,8 +36,7 @@
         <button class="btn btn-secondary ms-2" type="button" @onclick="CancelEdit">Cancel</button>
     </EditForm>
 }
-
-@if (links.Count == 0)
+else if (links.Count == 0)
 {
     <p>No links yet</p>
 }
@@ -48,16 +52,27 @@ else
     private List<LinkItem> links = new();
     private LinkItem? editingLink;
     private string tagsRaw = "";
+    private bool isLoading = true;
+    private string userId = "githubUser123"; // Replace with dynamic user from GitHub login later
 
-    private void AddLink(LinkItem newLink)
+    protected override async Task OnInitializedAsync()
     {
-        newLink.Id = links.Count + 1;
-        links.Add(newLink);
+        isLoading = true;
+        links = await LinkService.GetLinksByUser(userId);
+        isLoading = false;
     }
 
-    private void DeleteLink(LinkItem toDelete)
+    private async Task AddLink(LinkItem newLink)
     {
-        links.Remove(toDelete);
+        newLink.UserId = userId;
+        await LinkService.AddLink(newLink);
+        links = await LinkService.GetLinksByUser(userId);
+    }
+
+    private async Task DeleteLink(LinkItem toDelete)
+    {
+        await LinkService.DeleteLink(toDelete.Id, toDelete.UserId);
+        links = await LinkService.GetLinksByUser(userId);
     }
 
     private void StartEdit(LinkItem link)
@@ -65,6 +80,7 @@ else
         editingLink = new LinkItem
         {
             Id = link.Id,
+            UserId = link.UserId,
             Title = link.Title,
             Url = link.Url,
             Tags = new List<string>(link.Tags)
@@ -78,7 +94,7 @@ else
         tagsRaw = "";
     }
 
-    private void UpdateLink()
+    private async Task UpdateLink()
     {
         if (editingLink is null) return;
 
@@ -86,11 +102,8 @@ else
             .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .ToList();
 
-        var index = links.FindIndex(l => l.Id == editingLink.Id);
-        if (index >= 0)
-        {
-            links[index] = editingLink;
-        }
+        await LinkService.UpdateLink(editingLink);
+        links = await LinkService.GetLinksByUser(userId);
 
         editingLink = null;
         tagsRaw = "";
