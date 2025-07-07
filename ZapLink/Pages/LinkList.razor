@@ -1,50 +1,63 @@
 ﻿@page "/"
 @inject ZapLink.Services.LinkService LinkService
+@inject HttpClient Http
 @using ZapLink.Models
 @using ZapLink.Shared
 
 <h1>My Links</h1>
 
-<AddLinkForm OnAdd="AddLink" />
-
 @if (isLoading)
 {
     <p>Loading links...</p>
 }
-else if (editingLink is not null)
+else if (userId is null)
 {
-    <EditForm Model="editingLink" OnValidSubmit="UpdateLink">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="mb-2">
-            <label>Title</label>
-            <InputText class="form-control" @bind-Value="editingLink.Title" />
-        </div>
-
-        <div class="mb-2">
-            <label>URL</label>
-            <InputText class="form-control" @bind-Value="editingLink.Url" />
-        </div>
-
-        <div class="mb-2">
-            <label>Tags (comma separated)</label>
-            <InputText class="form-control" @bind-Value="tagsRaw" />
-        </div>
-
-        <button class="btn btn-success" type="submit">Save</button>
-        <button class="btn btn-secondary ms-2" type="button" @onclick="CancelEdit">Cancel</button>
-    </EditForm>
-}
-else if (links.Count == 0)
-{
-    <p>No links yet</p>
+    <p>
+        <a class="btn btn-primary" href="/.auth/login/github">Login with GitHub</a>
+    </p>
 }
 else
 {
-    @foreach (var link in links)
+    <p><strong>Logged in as:</strong> @userId</p>
+    <p><a href="/.auth/logout">Logout</a></p>
+
+    <AddLinkForm OnAdd="AddLink" />
+
+    @if (editingLink is not null)
     {
-        <LinkCard Link="link" OnDelete="DeleteLink" OnEdit="StartEdit" />
+        <EditForm Model="editingLink" OnValidSubmit="UpdateLink">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-2">
+                <label>Title</label>
+                <InputText class="form-control" @bind-Value="editingLink.Title" />
+            </div>
+
+            <div class="mb-2">
+                <label>URL</label>
+                <InputText class="form-control" @bind-Value="editingLink.Url" />
+            </div>
+
+            <div class="mb-2">
+                <label>Tags (comma separated)</label>
+                <InputText class="form-control" @bind-Value="tagsRaw" />
+            </div>
+
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-secondary ms-2" type="button" @onclick="CancelEdit">Cancel</button>
+        </EditForm>
+    }
+    else if (links.Count == 0)
+    {
+        <p>No links yet</p>
+    }
+    else
+    {
+        @foreach (var link in links)
+        {
+            <LinkCard Link="link" OnDelete="DeleteLink" OnEdit="StartEdit" />
+        }
     }
 }
 
@@ -53,17 +66,35 @@ else
     private LinkItem? editingLink;
     private string tagsRaw = "";
     private bool isLoading = true;
-    private string userId = "githubUser123"; // Replace with dynamic user from GitHub login later
+    private string? userId;
 
     protected override async Task OnInitializedAsync()
     {
         isLoading = true;
-        links = await LinkService.GetLinksByUser(userId);
+
+        try
+        {
+            var result = await Http.GetFromJsonAsync<AuthWrapper>("/.auth/me");
+            var user = result?.clientPrincipal;
+
+            if (user is not null)
+            {
+                userId = user.userId;
+                links = await LinkService.GetLinksByUser(userId);
+            }
+        }
+        catch
+        {
+            // fallback: user is not authenticated or .auth/me failed
+        }
+
         isLoading = false;
     }
 
     private async Task AddLink(LinkItem newLink)
     {
+        if (userId is null) return;
+
         newLink.UserId = userId;
         await LinkService.AddLink(newLink);
         links = await LinkService.GetLinksByUser(userId);
@@ -72,7 +103,7 @@ else
     private async Task DeleteLink(LinkItem toDelete)
     {
         await LinkService.DeleteLink(toDelete.Id, toDelete.UserId);
-        links = await LinkService.GetLinksByUser(userId);
+        links = await LinkService.GetLinksByUser(userId!);
     }
 
     private void StartEdit(LinkItem link)
@@ -103,9 +134,21 @@ else
             .ToList();
 
         await LinkService.UpdateLink(editingLink);
-        links = await LinkService.GetLinksByUser(userId);
+        links = await LinkService.GetLinksByUser(userId!);
 
         editingLink = null;
         tagsRaw = "";
+    }
+
+    private class AuthWrapper
+    {
+        public ClientPrincipal? clientPrincipal { get; set; }
+    }
+
+    private class ClientPrincipal
+    {
+        public string? userId { get; set; }
+        public string? userDetails { get; set; }
+        public string? identityProvider { get; set; }
     }
 }
