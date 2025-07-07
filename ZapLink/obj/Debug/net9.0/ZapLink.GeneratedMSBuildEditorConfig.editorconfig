@@ -13,41 +13,41 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = ZapLink
 build_property.RootNamespace = ZapLink
-build_property.ProjectDir = /Users/november/Documents/C# Project/ZaplinkApp/ZapLink/
+build_property.ProjectDir = /Users/november/Documents/C#Project/ZaplinkApp/ZapLink/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/november/Documents/C# Project/ZaplinkApp/ZapLink
+build_property.MSBuildProjectDirectory = /Users/november/Documents/C#Project/ZaplinkApp/ZapLink
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[/Users/november/Documents/C\# Project/ZaplinkApp/ZapLink/App.razor]
+[/Users/november/Documents/C\#Project/ZaplinkApp/ZapLink/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/november/Documents/C\# Project/ZaplinkApp/ZapLink/Pages/LinkList.razor]
+[/Users/november/Documents/C\#Project/ZaplinkApp/ZapLink/Pages/LinkList.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTGlua0xpc3QucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/november/Documents/C\# Project/ZaplinkApp/ZapLink/Shared/AddLinkForm.razor]
+[/Users/november/Documents/C\#Project/ZaplinkApp/ZapLink/Shared/AddLinkForm.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0FkZExpbmtGb3JtLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/november/Documents/C\# Project/ZaplinkApp/ZapLink/Shared/LinkCard.razor]
+[/Users/november/Documents/C\#Project/ZaplinkApp/ZapLink/Shared/LinkCard.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0xpbmtDYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/november/Documents/C\# Project/ZaplinkApp/ZapLink/_Imports.razor]
+[/Users/november/Documents/C\#Project/ZaplinkApp/ZapLink/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/november/Documents/C\# Project/ZaplinkApp/ZapLink/Layout/MainLayout.razor]
+[/Users/november/Documents/C\#Project/ZaplinkApp/ZapLink/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-phuq29aime
 
-[/Users/november/Documents/C\# Project/ZaplinkApp/ZapLink/Layout/NavMenu.razor]
+[/Users/november/Documents/C\#Project/ZaplinkApp/ZapLink/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0L05hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-rga03guwdg
