@@ -25,6 +25,15 @@ public class DeleteLink
     {
         _logger.LogInformation($"DeleteLink triggered for id: {id}");
 
+        // Only allow the owner's userId
+        const string ownerUserId = "153dc891d9a7446f84f682fdb33ca7d6";
+        if (userId != ownerUserId)
+        {
+            var forbidden = req.CreateResponse(HttpStatusCode.Forbidden);
+            await forbidden.WriteStringAsync("Not authorized.");
+            return forbidden;
+        }
+
         var container = _cosmosClient.GetContainer(_databaseId, _containerId);
         await container.DeleteItemAsync<LinkItem>(id, new PartitionKey(userId));
 

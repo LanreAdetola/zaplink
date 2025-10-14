@@ -29,10 +29,13 @@ public class UpdateLink
         var body = await new StreamReader(req.Body).ReadToEndAsync();
         var updatedLink = JsonConvert.DeserializeObject<LinkItem>(body);
 
-        if (updatedLink == null || string.IsNullOrWhiteSpace(updatedLink.UserId))
+
+        // Only allow the owner's userId
+        const string ownerUserId = "153dc891d9a7446f84f682fdb33ca7d6";
+        if (updatedLink == null || string.IsNullOrWhiteSpace(updatedLink.UserId) || updatedLink.UserId != ownerUserId)
         {
-            var badRes = req.CreateResponse(HttpStatusCode.BadRequest);
-            await badRes.WriteStringAsync("Invalid data.");
+            var badRes = req.CreateResponse(HttpStatusCode.Forbidden);
+            await badRes.WriteStringAsync("Not authorized.");
             return badRes;
         }
 

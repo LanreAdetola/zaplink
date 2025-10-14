@@ -17,7 +17,7 @@ else if (userId is null)
         <a class="btn btn-primary" href="/.auth/login/github">Login with GitHub</a>
     </p>
 }
-else
+else if (userId == "153dc891d9a7446f84f682fdb33ca7d6")
 {
     <p><strong>Logged in as:</strong> @userId</p>
     <p><a href="/.auth/logout">Logout</a></p>
@@ -58,6 +58,22 @@ else
         @foreach (var link in links)
         {
             <LinkCard Link="link" OnDelete="DeleteLink" OnEdit="StartEdit" />
+        }
+    }
+}
+else
+{
+    <p><strong>Logged in as:</strong> @userId</p>
+    <p>You do not have permission to add or edit links.</p>
+    @if (links.Count == 0)
+    {
+        <p>No links yet</p>
+    }
+    else
+    {
+        @foreach (var link in links)
+        {
+            <LinkCard Link="link" />
         }
     }
 }

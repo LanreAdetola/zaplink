@@ -23,9 +23,13 @@
 }
 else if (userId is null && string.IsNullOrWhiteSpace(developerUserId))
 {
-    <p>
-        <a class="btn btn-primary" href="/.auth/login/github">Login with GitHub</a>
-    </p>
+    <!-- Only show login if not logged in and this is the owner page -->
+    @if (developerUserId == "153dc891d9a7446f84f682fdb33ca7d6")
+    {
+        <p>
+            <a class="btn btn-primary" href="/.auth/login/github">Login with GitHub</a>
+        </p>
+    }
 }
 else if (links == null || links.Count == 0)
 {
@@ -35,7 +39,14 @@ else
 {
     @foreach (var item in links)
     {
-        <LinkCard Link="item" OnDelete="DeleteLink" OnEdit="StartEdit" />
+        if (userId == "153dc891d9a7446f84f682fdb33ca7d6")
+        {
+            <LinkCard Link="item" OnDelete="DeleteLink" OnEdit="StartEdit" />
+        }
+        else
+        {
+            <LinkCard Link="item" />
+        }
     }
 }
 

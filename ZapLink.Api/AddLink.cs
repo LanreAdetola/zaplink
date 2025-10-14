@@ -40,10 +40,13 @@ public class AddLink
 
         var newLink = JsonConvert.DeserializeObject<LinkItem>(requestBody, jsonSettings);
 
-        if (newLink == null || string.IsNullOrWhiteSpace(newLink.UserId))
+
+        // Only allow the owner's userId
+        const string ownerUserId = "153dc891d9a7446f84f682fdb33ca7d6";
+        if (newLink == null || string.IsNullOrWhiteSpace(newLink.UserId) || newLink.UserId != ownerUserId)
         {
-            var badResponse = req.CreateResponse(HttpStatusCode.BadRequest);
-            await badResponse.WriteStringAsync("Invalid request.");
+            var badResponse = req.CreateResponse(HttpStatusCode.Forbidden);
+            await badResponse.WriteStringAsync("Not authorized.");
             return badResponse;
         }
 
