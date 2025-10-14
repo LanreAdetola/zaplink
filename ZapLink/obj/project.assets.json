@@ -1762,11 +1762,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/november/Documents/C#Project/ZaplinkApp/ZapLink/ZapLink.csproj",
+      "projectUniqueName": "/Users/november/Documents/ZaplinkApp/ZapLink/ZapLink.csproj",
       "projectName": "ZapLink",
-      "projectPath": "/Users/november/Documents/C#Project/ZaplinkApp/ZapLink/ZapLink.csproj",
+      "projectPath": "/Users/november/Documents/ZaplinkApp/ZapLink/ZapLink.csproj",
       "packagesPath": "/Users/november/.nuget/packages/",
-      "outputPath": "/Users/november/Documents/C#Project/ZaplinkApp/ZapLink/obj/",
+      "outputPath": "/Users/november/Documents/ZaplinkApp/ZapLink/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/november/.nuget/NuGet/NuGet.Config"
@@ -1775,6 +1775,7 @@
         "net9.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

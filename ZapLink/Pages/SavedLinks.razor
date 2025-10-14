@@ -1,0 +1,101 @@
+@page "/saved"
+@using ZapLink.Models
+@inject ZapLink.Services.LinkService LinkService
+@inject HttpClient Http
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
+<h3>Saved Links</h3>
+
+@if (!string.IsNullOrWhiteSpace(developerUserId))
+{
+    <div class="mb-2"><small class="text-muted">Showing links from @developerDisplayName</small></div>
+}
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (userId is null && string.IsNullOrWhiteSpace(developerUserId))
+{
+    <p>
+        <a class="btn btn-primary" href="/.auth/login/github">Login with GitHub</a>
+    </p>
+}
+else if (links == null || links.Count == 0)
+{
+    <p>No saved links yet.</p>
+}
+else
+{
+    @foreach (var item in links)
+    {
+        <LinkCard Link="item" OnDelete="DeleteLink" OnEdit="StartEdit" />
+    }
+}
+
+@code {
+    private List<LinkItem>? links;
+    private bool isLoading = true;
+    private string? userId;
+    private string? developerUserId;
+    private string? developerDisplayName;
+    private LinkItem? editingLink;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+
+        // read developer config (public-facing)
+        developerUserId = Configuration["DeveloperUserId"];
+        developerDisplayName = Configuration["DeveloperDisplayName"] ?? "Developer";
+
+        try
+        {
+            var result = await Http.GetFromJsonAsync<AuthWrapper>("/.auth/me");
+            var user = result?.clientPrincipal;
+
+            if (user is not null)
+            {
+                userId = user.userId;
+            }
+        }
+        catch
+        {
+            // auth not available / user not logged in
+        }
+
+        // If developer is configured, show their links publicly. Otherwise show current user's links (if logged in).
+        var targetUserId = !string.IsNullOrWhiteSpace(developerUserId) ? developerUserId : userId;
+
+        if (!string.IsNullOrWhiteSpace(targetUserId))
+        {
+            links = await LinkService.GetLinksByUser(targetUserId!);
+        }
+
+        isLoading = false;
+    }
+
+    private async Task DeleteLink(LinkItem toDelete)
+    {
+        await LinkService.DeleteLink(toDelete.Id, toDelete.UserId);
+        links = await LinkService.GetLinksByUser(userId!);
+    }
+
+    private void StartEdit(LinkItem link)
+    {
+        // placeholder: could surface an edit UI or navigate back to My Links
+        editingLink = link;
+    }
+
+    private class AuthWrapper
+    {
+        public ClientPrincipal? clientPrincipal { get; set; }
+    }
+
+    private class ClientPrincipal
+    {
+        public string? userId { get; set; }
+        public string? userDetails { get; set; }
+        public string? identityProvider { get; set; }
+    }
+}

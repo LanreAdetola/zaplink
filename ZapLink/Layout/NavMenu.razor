@@ -6,16 +6,21 @@
         </button>
     </div>
 </div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable collapse d-sm-inline-flex flex-sm-row-reverse" @onclick="ToggleNavMenu">
     <nav class="nav flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill" aria-hidden="true"></span> My Links
             </NavLink>
         </div>
-        
 
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/saved" Match="NavLinkMatch.Prefix">
+                <span class="bi bi-bookmark" aria-hidden="true"></span> Saved Links
+            </NavLink>
+        </div>
+
+        <!-- add other nav items here -->
     </nav>
 </div>
 
