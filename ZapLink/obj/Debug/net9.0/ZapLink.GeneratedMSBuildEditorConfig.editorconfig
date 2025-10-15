@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0xpbmtDYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/november/Documents/ZaplinkApp/ZapLink/Shared/SavedLinkCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1NhdmVkTGlua0NhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/november/Documents/ZaplinkApp/ZapLink/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

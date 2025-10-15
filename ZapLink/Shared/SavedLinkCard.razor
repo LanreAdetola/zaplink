@@ -1,0 +1,25 @@
+@using ZapLink.Models
+
+<div class="link-card mb-3 p-3 border rounded shadow-sm">
+    <h3>@Link.Title</h3>
+    <a href="@Link.Url" target="_blank" rel="noopener noreferrer">@Link.Url</a>
+    <div class="tags mt-2">
+        @foreach (var tag in Link.Tags)
+        {
+            <span class="badge bg-primary me-1">@tag</span>
+        }
+    </div>
+
+    <small class="text-muted d-block mt-2">
+        Added on @Link.CreatedAt.ToLocalTime().ToString("MMM dd, yyyy")
+    </small>
+
+    <div class="actions mt-2">
+        <a class="btn btn-sm btn-primary" href="@Link.Url" target="_blank" rel="noopener noreferrer">Open</a>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public LinkItem Link { get; set; } = new();
+}

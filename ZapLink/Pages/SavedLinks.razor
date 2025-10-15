@@ -39,13 +39,14 @@ else
 {
     @foreach (var item in links)
     {
-        if (userId == "153dc891d9a7446f84f682fdb33ca7d6")
+        // If the current viewer is the configured developer (owner), show edit/delete controls.
+        if (!string.IsNullOrWhiteSpace(userId) && !string.IsNullOrWhiteSpace(developerUserId) && userId == developerUserId)
         {
             <LinkCard Link="item" OnDelete="DeleteLink" OnEdit="StartEdit" />
         }
         else
         {
-            <LinkCard Link="item" />
+            <SavedLinkCard Link="item" />
         }
     }
 }

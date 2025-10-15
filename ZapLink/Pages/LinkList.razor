@@ -4,8 +4,13 @@
 @using ZapLink.Models
 @using ZapLink.Shared
 
-<h1>Welcome to Lanre's Zaplink</h1>
-<h1>My Links</h1>
+<section class="hero py-5 text-center bg-light rounded mb-4">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Save & share useful links</h1>
+        <p class="lead text-muted">Collect your favorite pages, organize with tags, and share a public list.</p>
+        <a class="btn btn-primary btn-lg mt-3" href="#add-link">Add a link</a>
+    </div>
+</section>
 
 @if (isLoading)
 {
@@ -49,17 +54,21 @@ else if (userId == "153dc891d9a7446f84f682fdb33ca7d6")
             <button class="btn btn-secondary ms-2" type="button" @onclick="CancelEdit">Cancel</button>
         </EditForm>
     }
-    else if (links.Count == 0)
-    {
-        <p>No links yet</p>
-    }
-    else
-    {
-        @foreach (var link in links)
+        else if (links.Count == 0)
         {
-            <LinkCard Link="link" OnDelete="DeleteLink" OnEdit="StartEdit" />
+            <p>No links yet</p>
         }
-    }
+        else
+        {
+            <div class="links-grid">
+                @foreach (var link in links)
+                {
+                    <div class="grid-item">
+                        <LinkCard Link="link" OnDelete="DeleteLink" OnEdit="StartEdit" />
+                    </div>
+                }
+            </div>
+        }
 }
 else
 {
@@ -168,4 +177,10 @@ else
         public string? userDetails { get; set; }
         public string? identityProvider { get; set; }
     }
+}
+
+@* Floating Add button (visible to owner) *@
+@if (userId == "153dc891d9a7446f84f682fdb33ca7d6")
+{
+    <a class="btn btn-primary fab" href="#add-link" aria-label="Add link">+</a>
 }
