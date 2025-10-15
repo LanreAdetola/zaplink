@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZapLink")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+090092f28789aa2d6526d097eaee97f52201a8d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a026c96cffa7958a006d5b47072d2beb106fcbb")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZapLink")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZapLink")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

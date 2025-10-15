@@ -39,15 +39,7 @@ else
 {
     @foreach (var item in links)
     {
-        // If the current viewer is the configured developer (owner), show edit/delete controls.
-        if (!string.IsNullOrWhiteSpace(userId) && !string.IsNullOrWhiteSpace(developerUserId) && userId == developerUserId)
-        {
-            <LinkCard Link="item" OnDelete="DeleteLink" OnEdit="StartEdit" />
-        }
-        else
-        {
-            <SavedLinkCard Link="item" />
-        }
+        <SavedLinkCard Link="item" />
     }
 }
 
@@ -57,7 +49,6 @@ else
     private string? userId;
     private string? developerUserId;
     private string? developerDisplayName;
-    private LinkItem? editingLink;
 
     protected override async Task OnInitializedAsync()
     {
@@ -91,18 +82,6 @@ else
         }
 
         isLoading = false;
-    }
-
-    private async Task DeleteLink(LinkItem toDelete)
-    {
-        await LinkService.DeleteLink(toDelete.Id, toDelete.UserId);
-        links = await LinkService.GetLinksByUser(userId!);
-    }
-
-    private void StartEdit(LinkItem link)
-    {
-        // placeholder: could surface an edit UI or navigate back to My Links
-        editingLink = link;
     }
 
     private class AuthWrapper
