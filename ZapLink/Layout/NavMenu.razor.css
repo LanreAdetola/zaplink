@@ -81,3 +81,24 @@
         overflow-y: auto;
     }
 }
+
+/* Mobile menu styles */
+@media (max-width: 640px) {
+    .nav-scrollable {
+        background-color: rgba(13, 27, 62, 0.98);
+        position: absolute;
+        top: 3.5rem;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+    }
+    
+    .nav-scrollable.collapse {
+        display: none;
+    }
+    
+    .nav-scrollable:not(.collapse) {
+        display: block;
+    }
+}
