@@ -12,11 +12,6 @@
     <div class="mb-2"><small class="text-muted">Showing links from @developerDisplayName</small></div>
 }
 
-@if (!string.IsNullOrWhiteSpace(userId))
-{
-    <div class="mb-2"><small class="text-info">Your user ID: <code>@userId</code></small></div>
-}
-
 @if (isLoading)
 {
     <p>Loading...</p>
